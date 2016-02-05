@@ -3,13 +3,21 @@
 ### MAC_NOTES_FOLDER
 MAC_NOTES_FOLDER="${HOME}/Workspace/mac-os-x-notes"
 if [ ! -r "${MAC_NOTES_FOLDER}" ]; then
-    echo "Erroc reading ${MAC_NOTES_FOLDER}" 1>&2
+    echo "Error reading ${MAC_NOTES_FOLDER}" 1>&2
+    exit 1
+fi
+
+### Check that conda is installed
+if [[ ! $(which conda) ]]; then
+    echo "Cannot find command 'conda'" 1>&2
+    echo "Please install anaconda or miniconda" 1>&2
     exit 1
 fi
 
 ### .bashrc
 chmod +x "${MAC_NOTES_FOLDER}/bashrc.sh"
 "${MAC_NOTES_FOLDER}/bashrc.sh"
+
 echo '# python' >> ~/.bashrc
 
 ### IPython
